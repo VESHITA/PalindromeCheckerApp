@@ -51,6 +51,31 @@ public class PalidromeCheckerApp {
         }
     }
 
+    void twoPointerApproach(String s) {
+        char[] charArray = s.toCharArray();
+        int size = charArray.length;
+        int start = 0;
+        int end = size - 1;
+        int mid = (start + end) / 2;
+        boolean isPalindrome = true;
+
+        while (start <= mid) {
+            if (charArray[start] == charArray[end]) {
+                start++;
+                end--;
+            } else {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        if (isPalindrome) {
+            System.out.println("The string is a palindrome (checked till middle)");
+        } else {
+            System.out.println("The string is NOT a palindrome (checked till middle)");
+        }
+    }
+
     public static void main(String[] args) {
         Palindrome p = new Palindrome();
         p.start();
@@ -66,6 +91,16 @@ public class PalidromeCheckerApp {
 
         System.out.println("To check palindrome using equals(), enter 'yes': ");
         String ans = sc.nextLine();
+        if (ans.equals("yes")) {
+            if (app.str_equals(s) == 1)
+            {
+                System.out.println("Palindrome found");
+            } else {
+                System.out.println("Not a Palindrome");
+            }
+        } else {
+            System.out.println("Since you didn’t enter 'yes', we’ll move forward with other functions.");
+        }
 
     }
 }
