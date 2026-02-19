@@ -104,6 +104,26 @@ public class PalidromeCheckerApp {
         }
     }
 
+    void queue_palindrome() {
+        Queue<Character> q = new ArrayDeque<>();
+        String s = "radar";
+        System.out.println(s + " is the string to be checked using queue");
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            q.add(ch);
+        }
+
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = q.peek();
+            System.out.print(c);
+            q.remove();
+        }
+
+        System.out.println("\nchecked palindrome");
+    }
+
     public static void main(String[] args) {
         Palindrome p = new Palindrome();
         p.start();
@@ -129,6 +149,13 @@ public class PalidromeCheckerApp {
         } else {
             System.out.println("Since you didn’t enter 'yes', we’ll move forward with other functions.");
         }
+        // You can also test the other approaches:
+        checkPalindrome(s);
+        app.twoPointerApproach(s);
+        app.stack_palindrome();
+        app.queue_palindrome();
+
+        sc.close();
 
     }
 }
