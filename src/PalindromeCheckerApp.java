@@ -1,31 +1,42 @@
 import java.util.Scanner;
+import java.util.Stack;
 
-public class PalindromeCheckerApp {
-    public static void checkCaseInsensitivePalindrome(String input) {
+class PalindromeChecker {
+
+    public boolean checkPalindrome(String input) {
+        if (input == null || input.isEmpty()) return true;
+
+        Stack<Character> stack = new Stack<>();
         String normalized = input.toLowerCase().replaceAll("[^a-z0-9]", "");
 
-        int left = 0, right = normalized.length() - 1;
-        boolean isPalindrome = true;
-
-        while (left < right) {
-            if (normalized.charAt(left) != normalized.charAt(right)) {
-                isPalindrome = false;
-                break;
-            }
-            left++;
-            right--;
+        for (char ch : normalized.toCharArray()) {
+            stack.push(ch);
         }
 
-        System.out.println("\nUC10 Result: \"" + input + "\" is "
-                + (isPalindrome ? "" : "NOT ") + "a palindrome (ignoring case & spaces).");
+        for (char ch : normalized.toCharArray()) {
+            if (stack.pop() != ch) {
+                return false;
+            }
+        }
+
+        return true;
     }
+}
+
+public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter a string for UC10 case-insensitive check: ");
-        String inputUC10 = sc.nextLine();
-        checkCaseInsensitivePalindrome(inputUC10);
+        System.out.println("=== UC11: Object-Oriented Palindrome Checker ===");
+        System.out.print("Enter a string to check: ");
+        String input = sc.nextLine();
+
+        PalindromeChecker checker = new PalindromeChecker();
+        boolean result = checker.checkPalindrome(input);
+
+        System.out.println("\nUC11 Result: \"" + input + "\" is "
+                + (result ? "" : "NOT ") + "a palindrome.");
 
         sc.close();
     }
