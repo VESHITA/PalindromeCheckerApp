@@ -1,24 +1,31 @@
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
+    public static void checkCaseInsensitivePalindrome(String input) {
+        String normalized = input.toLowerCase().replaceAll("[^a-z0-9]", "");
 
-    public static boolean isPalindromeRecursive(String str, int start, int end) {
-        if (start >= end) return true;
-        if (str.charAt(start) != str.charAt(end)) return false;
-        return isPalindromeRecursive(str, start + 1, end - 1);
-    }
+        int left = 0, right = normalized.length() - 1;
+        boolean isPalindrome = true;
 
-    public static void checkPalindromeUsingRecursion() {
-        String input = "malayalam";
-        boolean isPalindrome = isPalindromeRecursive(input, 0, input.length() - 1);
-        System.out.println("\nUC9 Result: \"" + input + "\" is "
-                + (isPalindrome ? "" : "NOT ") + "a palindrome.");
+        while (left < right) {
+            if (normalized.charAt(left) != normalized.charAt(right)) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+
+        System.out.println("\nUC10 Result: \"" + input + "\" is "
+                + (isPalindrome ? "" : "NOT ") + "a palindrome (ignoring case & spaces).");
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        checkPalindromeUsingRecursion();
+        System.out.print("Enter a string for UC10 case-insensitive check: ");
+        String inputUC10 = sc.nextLine();
+        checkCaseInsensitivePalindrome(inputUC10);
 
         sc.close();
     }
